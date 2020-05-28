@@ -25,7 +25,6 @@ aside,
 details,
 figcaption,
 figure,
-footer,
 header,
 hgroup,
 main,
@@ -55,7 +54,7 @@ template {
 }
 
 a {
-  background-color: transparent;
+  background-color:  transparent;
 }
 
 a:active,
@@ -1402,7 +1401,7 @@ body {
   font-size: 14px;
   line-height: 1.6;
   color: #636b6f;
-  background-color: #f5f8fa;
+  background-color: #001133;
 }
 
 input,
@@ -5771,7 +5770,8 @@ fieldset[disabled] .navbar-default .btn-link:focus {
 }
 
 .navbar-inverse {
-  background-color: #222;
+  background-color:black
+  ;
   border-color: #090909;
 }
 
