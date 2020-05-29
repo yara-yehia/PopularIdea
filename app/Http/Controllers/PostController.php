@@ -50,7 +50,12 @@ class PostController extends Controller
         $this->validate($request, [
             'title' => 'required',
             'body' => 'required',
+
         ]);
+
+
+
+
 
         //create post
         $post = new Post;
@@ -61,7 +66,18 @@ class PostController extends Controller
 
         return redirect('/posts')->with('success','Post Created');
     }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        $post = Post::find($id);
+        return view('posts.show')->with('post', $post);
 
+    }
 
     /**
      * Show the form for editing the specified resource.
@@ -72,6 +88,13 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
+        if(!isset($post)){
+            return redirect('/posts')->with('error', 'No Post Found');
+        }
+
+        if(auth()->user()->id !== $post->user_id){
+            return reditrct('/posts')->with('error', 'Unauthorized Page');
+        }
         return view('posts.edit')->with('post', $post);
     }
 
@@ -91,8 +114,10 @@ class PostController extends Controller
 
         //edit post
         $post = Post::find($id);
+
         $post->title = $request->input('title');
         $post->body = $request->input('body');
+
         $post->save();
 
         return redirect('/posts')->with('success','Post Updated');
@@ -107,10 +132,19 @@ class PostController extends Controller
     public function destroy($id)
     {
         $post = Post::find($id);
+
+        // Check for correct user
+        if(auth()->user()->id !==$post->user_id){
+            return redirect('/posts')->with('error', 'Unauthorized Page');
+        }
+
+
+
         $post->delete();
         return redirect('/posts')->with('success','Post Removed');
 
     }
-    
+
+
 
 }
