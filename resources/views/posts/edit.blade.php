@@ -11,9 +11,7 @@
             {{Form::label('body', 'Body')}}
             {{Form::textarea('body', $post->body, ['id' => 'article-ckeditor', 'class' => 'form-control', 'placeholder' => 'Body Text'])}}
         </div>
-        <div class="form-group">
-            {{Form::file('cover_image')}}
-        </div>
+
         {{Form::hidden('_method','PUT')}}
         {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
     {!! Form::close() !!}
